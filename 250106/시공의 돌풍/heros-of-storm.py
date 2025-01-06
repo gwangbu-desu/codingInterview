@@ -1,5 +1,6 @@
 WINDBLAST = -1
-
+import sys
+input = sys.stdin.readline
 # 변수 선언 및 입력:
 n, m, t = tuple(map(int, input().split()))
 

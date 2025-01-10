@@ -18,7 +18,7 @@ def back(alst, blst, idx):
     if len(alst) == len(blst) and idx == n:
         minimum = min(minimum, abs(cal(alst) - cal(blst)))
         return
-    if len(alst) >3 or len(blst)>3:
+    if len(alst) > exit_condition or len(blst)>exit_condition:
         return
 
     back(alst+[idx], blst, idx+1)

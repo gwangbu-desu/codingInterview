@@ -11,8 +11,8 @@ for i in range(1,n):
     if dp[0][i-1] !=0:
         dp[0][i] = min(dp[0][i-1], arr[0][i])
 
-for i in range(n):
-    for j in range(n):
+for i in range(1,n):
+    for j in range(1,n):
         a=min(dp[i-1][j], arr[i][j])
         b=min(dp[i][j-1], arr[i][j])
         dp[i][j] = max(a,b)

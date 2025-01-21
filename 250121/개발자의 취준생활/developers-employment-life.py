@@ -2,22 +2,18 @@ n = int(input())
 employee = list(map(int, input().split()))
 company = list(map(int, input().split()))
 
-ans = 0
+# DP 테이블 초기화
+dp = [[0] * (1 << n) for _ in range(n + 1)]
+dp[0][0] = 1  # 초기 상태
 
-def bt(used: list, idx: int):
-    global ans
-    if idx == n:  # 모든 직원의 요구를 충족한 경우
-        ans += 1
-        return
+# DP 상태 전이
+for i in range(n):  # i번째 직원
+    for mask in range(1 << n):  # 현재 회사 자원의 사용 상태
+        if dp[i][mask] == 0:
+            continue  # 유효하지 않은 상태는 건너뜀
+        for j in range(n):  # j번째 회사
+            if not (mask & (1 << j)) and company[j] >= employee[i]:
+                dp[i + 1][mask | (1 << j)] += dp[i][mask]
 
-    for i, c in enumerate(company):
-        if not used[i] and c >= employee[idx]:
-            used[i] = True  # 회사 자원을 사용
-            bt(used, idx + 1)
-            used[i] = False  # 되돌리기
-
-# 회사 자원 사용 여부를 추적하기 위한 배열
-used = [False] * n
-bt(used, 0)
-
-print(ans)
+# 최종 결과
+print(dp[n][(1 << n) - 1])

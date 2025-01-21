@@ -7,7 +7,7 @@ company = list(map(int,input().split()))
 ans = 0
 def bt(remains:list,idx:int):
     global ans
-    if idx == 3 and remains[0] >= employee[idx]:
+    if idx == n-1 and remains[0] >= employee[idx]:
         ans += 1
     for index,value in enumerate(remains):
         if value >= employee[idx]:

@@ -23,7 +23,8 @@ def range_check(x,y):
         return True
     return False
 
-def dfs(x,y):
+def bfs(x,y):
+    visited[y][x] = True
     population = 0
     dq = deque([(x,y)])
     country_list = []
@@ -45,15 +46,14 @@ while True:
     for i in range(N):
         for j in range(N):
             if not visited[j][i]:
-                visited[j][i] = True
-                population, count_lst = dfs(i,j)
+                population, count_lst = bfs(i,j)
                 if len(count_lst) > 1:
                     move_list.append((population, count_lst))
 
     if move_list:
         answer += 1
         for pop, count_lst in move_list:
-            avg = math.floor(pop / len(count_lst))
+            avg = pop // len(count_lst)
             for x,y in count_lst:
                 arr[y][x] = avg
     else: break

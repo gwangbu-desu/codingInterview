@@ -23,22 +23,23 @@ def change_dir(d):
     else:
         return 2
 
-def shark_move(r,c,s,d):
-    nr = r
-    nc = c
-    nd = d
-    for i in range(s):
-        rr = nr + dr[nd]
-        cc = nc + dc[nd]
-        if check(rr,cc): # 갈 수 있음
-            nr = rr
-            nc = cc
-        else: # 갈 수 없음 -> 방향 전환해서 전진
-            nd = change_dir(nd)
-            nr += dr[nd]
-            nc += dc[nd]
+def shark_move(r, c, s, d):
+    if d <= 1:  # 상하 이동
+        cycle = 2 * (R - 1)
+        s %= cycle
+        for _ in range(s):
+            if not (0 <= r + dr[d] < R):
+                d = change_dir(d)
+            r += dr[d]
+    else:  # 좌우 이동
+        cycle = 2 * (C - 1)
+        s %= cycle
+        for _ in range(s):
+            if not (0 <= c + dc[d] < C):
+                d = change_dir(d)
+            c += dc[d]
+    return r, c, d
 
-    return nr, nc, nd
 
 
 def check(nr,nc):

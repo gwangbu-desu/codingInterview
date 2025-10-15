@@ -1,0 +1,9 @@
+-- 코드를 작성해주세요
+SELECT ID,
+CASE
+    When SIZE_OF_COLONY <= 100 then 'LOW'
+    When SIZE_OF_COLONY <= 1000 then 'MEDIUM'
+    When SIZE_OF_COLONY > 1000 then 'HIGH'
+END as SIZE
+FROM ECOLI_DATA
+ORDER BY ID

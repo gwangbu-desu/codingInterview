@@ -1,7 +1,7 @@
 import java.util.*;
 class Solution {
     public int solution(int n, int[][] edge) {
-        
+        int maxValue = 0;
         int[] distance  = new int[n+1]; // 1-th index
         boolean[] visited = new boolean[n+1];
         ArrayList<Integer>[] edges = new ArrayList[n+1];
@@ -14,7 +14,7 @@ class Solution {
             edges[_edge[0]].add(_edge[1]);
             edges[_edge[1]].add(_edge[0]);
         }
-        Queue<Integer> dq = new ArrayDeque<>();
+        Queue<Integer> dq = new LinkedList<>();
         dq.add(1);
         visited[1] = true;
         while(!dq.isEmpty()){
@@ -24,16 +24,12 @@ class Solution {
                 visited[dist] = true;
                 dq.add(dist);
                 distance[dist] = distance[temp] + 1;
-                
-            }
-        }
-        Arrays.sort(distance);
-        int max = distance[n];
-        // System.out.println(max);
-        for(int i: distance){
-            System.out.println(i);
-            if ( i == max){
-                answer ++;
+                if(maxValue < distance[dist]){
+                    maxValue = distance[dist];
+                    answer = 1;
+                }else if(maxValue == distance[dist]){
+                    answer++;
+                }
             }
         }
         return answer;
